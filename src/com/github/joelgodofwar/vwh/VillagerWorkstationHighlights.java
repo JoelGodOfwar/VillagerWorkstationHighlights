@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -67,32 +68,56 @@ public class VillagerWorkstationHighlights extends JavaPlugin implements Listene
 			if(!(sender instanceof Player)){
 				return false;
 			}else{
-				Player player = (Player) sender;
-				Entity entity = getNearestEntityInSight(player, 10);
-				log("entity=" + entity.toString());
-				
-				if(entity instanceof Villager){
-					Villager villager = (Villager) entity;
-					log("villager=" + villager.toString());
-					Location workstation = villager.getMemory(MemoryKey.JOB_SITE);
-					log("workstation=" + workstation.toString());
-					AreaEffectCloud cloud = (AreaEffectCloud) villager.getLocation().getWorld().spawnEntity(workstation.add(.5, 1, .5), EntityType.AREA_EFFECT_CLOUD);
-					cloud.setParticle(Particle.HEART, null);
-					cloud.setDuration(200);
-					cloud.setReapplicationDelay(10);
-					cloud.setRadius(0.5f);
-					cloud.setRadiusPerTick(0f);
-					cloud.setRadiusOnUse(0f);
+				if (args.length == 0){
+					Player player = (Player) sender;
+					Entity entity = getNearestEntityInSight(player, 10);
+					log("entity=" + entity.toString());
 					
-					//villager.getWorld().spawnParticle(Particle.HEART, workstation.add(0, .5, 0), 2000);
-					//villager.getWorld().spawnParticle(Particle.HEART, workstation.add(.5, 0, 0), 2000);
-					//villager.getWorld().spawnParticle(Particle.HEART, workstation.add(0, 0, .5), 2000);
-					//villager.getWorld().spawnParticle(Particle.HEART, workstation.add(0, .5, 0), 2000);
-					//villager.getWorld().spawnParticle(Particle.HEART, workstation.add(.5, 0, 0), 2000);
-					log("completed");
-					//villager.getWorld().sp
-					//BlockFace a = player.getLineOfSight(arg0, arg1);
-					return true;
+					if(entity instanceof Villager){
+						Villager villager = (Villager) entity;
+						log("villager=" + villager.toString());
+						Location workstation = villager.getMemory(MemoryKey.JOB_SITE);
+						log("workstation=" + workstation.toString());
+						AreaEffectCloud cloud = (AreaEffectCloud) villager.getLocation().getWorld().spawnEntity(workstation.add(.5, 1, .5), EntityType.AREA_EFFECT_CLOUD);
+						cloud.setParticle(Particle.HEART, null);
+						cloud.setDuration(200);
+						cloud.setReapplicationDelay(10);
+						cloud.setRadius(0.5f);
+						cloud.setRadiusPerTick(0f);
+						cloud.setRadiusOnUse(0f);
+						
+						//villager.getWorld().spawnParticle(Particle.HEART, workstation.add(0, .5, 0), 2000);
+						//villager.getWorld().spawnParticle(Particle.HEART, workstation.add(.5, 0, 0), 2000);
+						//villager.getWorld().spawnParticle(Particle.HEART, workstation.add(0, 0, .5), 2000);
+						//villager.getWorld().spawnParticle(Particle.HEART, workstation.add(0, .5, 0), 2000);
+						//villager.getWorld().spawnParticle(Particle.HEART, workstation.add(.5, 0, 0), 2000);
+						log("completed");
+						//villager.getWorld().sp
+						//BlockFace a = player.getLineOfSight(arg0, arg1);
+						return true;
+					}
+				}
+				if(args[0].equalsIgnoreCase("set")){
+					// /vwh set x y z
+					//       0  1 2 3
+					//   1   2  3 4 5
+					log("args.length=" + args.length);
+					if(!(args.length >= 4)){
+						sender.sendMessage(ChatColor.YELLOW + this.getName() + ChatColor.RED + " Arguments needed \n/vwh set x y z");
+						return false;
+					}else{
+						Player player = (Player) sender;
+						Entity entity = getNearestEntityInSight(player, 10);
+						log("entity=" + entity.toString());
+						if(entity instanceof Villager){
+							Villager villager = (Villager) entity;
+							log("villager=" + villager.toString());
+							Location workstation = new Location(villager.getWorld(), Integer.parseInt(args[1]), Integer.parseInt(args[2]), Integer.parseInt(args[3]));
+							villager.setMemory(MemoryKey.POTENTIAL_JOB_SITE, workstation);//.getMemory(MemoryKey.JOB_SITE);
+							log("workstation=" + workstation.toString());
+						}
+					}
+					
 				}
 			}
 			
@@ -170,6 +195,7 @@ public class VillagerWorkstationHighlights extends JavaPlugin implements Listene
 				log("isVillager");
 				Villager villager = (Villager) event.getRightClicked();
 				Location workstation = villager.getMemory(MemoryKey.JOB_SITE);
+				log("workstation=" + workstation.toString());
 				if(workstation != null){
 					log("workstation != null");
 					if(!(workstation.getWorld().getNearbyEntities(workstation, .5, 1, .5) instanceof AreaEffectCloud)){
