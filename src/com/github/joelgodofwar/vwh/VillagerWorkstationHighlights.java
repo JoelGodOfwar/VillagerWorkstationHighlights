@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -23,9 +24,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
+
+import com.github.joelgodofwar.vwh.api.Workstation;
 
 @SuppressWarnings("unused")
 public class VillagerWorkstationHighlights extends JavaPlugin implements Listener{
@@ -33,6 +37,7 @@ public class VillagerWorkstationHighlights extends JavaPlugin implements Listene
 	
 	@Override // TODO:
 	public void onEnable() {
+		Bukkit.getPluginManager().registerEvents(this, this);
 		consoleInfo("ENABLED");
 	}
 	
@@ -151,27 +156,41 @@ public class VillagerWorkstationHighlights extends JavaPlugin implements Listene
 	@EventHandler
 	public void onPlayerInteractEvent(PlayerInteractEntityEvent event){	
 		Player player = event.getPlayer();
-		Entity clicked = event.getRightClicked();
-		if(event.getRightClicked() instanceof Villager&&player.isSneaking()){
-			//player.isSneaking()
-			event.setCancelled(true);
-			log("isVillager");
-			Villager villager = (Villager) event.getRightClicked();
-			Location workstation = villager.getMemory(MemoryKey.JOB_SITE);
-			if(workstation != null){
-				log("workstation != null");
-				AreaEffectCloud cloud = (AreaEffectCloud) villager.getLocation().getWorld().spawnEntity(workstation.add(.5, 1, .5), EntityType.AREA_EFFECT_CLOUD);
-				cloud.setParticle(Particle.HEART, null);
-				cloud.setDuration(200);
-				cloud.setReapplicationDelay(10);
-				cloud.setRadius(0.5f);
-				cloud.setRadiusPerTick(0f);
-				cloud.setRadiusOnUse(0f);
+		ItemStack main = player.getInventory().getItemInMainHand();
+		log("main.getType()=" + main.getType());
+		ItemStack off = player.getInventory().getItemInOffHand();
+		log("off.getType()=" + off.getType());
+		if(Workstation.isWorkstation(main.getType())||Workstation.isWorkstation(off.getType())){
+			log("vvvvvvvvvvvvvvvvvvvvvvvvvvvvvv");
+			Entity clicked = event.getRightClicked();
+			
+			if(event.getRightClicked() instanceof Villager&&player.isSneaking()){
+				//player.isSneaking()
+				event.setCancelled(true);
+				log("isVillager");
+				Villager villager = (Villager) event.getRightClicked();
+				Location workstation = villager.getMemory(MemoryKey.JOB_SITE);
+				if(workstation != null){
+					log("workstation != null");
+					if(!(workstation.getWorld().getNearbyEntities(workstation, .5, 1, .5) instanceof AreaEffectCloud)){
+						AreaEffectCloud cloud = (AreaEffectCloud) villager.getLocation().getWorld().spawnEntity(workstation.add(.5, 1, .5), EntityType.AREA_EFFECT_CLOUD);
+						cloud.setParticle(Particle.HEART, null);
+						cloud.setDuration(200);
+						cloud.setReapplicationDelay(10);
+						cloud.setRadius(0.5f);
+						cloud.setRadiusPerTick(0f);
+						cloud.setRadiusOnUse(0f);
+						log("AreaEffectCloud set");
+						}
+				}else{
+					log("workstation = null");
+				}
+				
 			}else{
-				log("workstation = null");
+				log("!isVillager");
 			}
-		}else{
-			log("!isVillager");
+			log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+			//event.setCancelled(false);
 		}
 	}
 }
