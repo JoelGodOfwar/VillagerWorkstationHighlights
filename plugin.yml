@@ -3,8 +3,17 @@ main: com.github.joelgodofwar.vwh.VillagerWorkstationHighlights
 version: 1.16_1.0.0
 author: JoelYahwehOfWar
 api-version: 1.13
+description: Highlights Villager Workstations assigned to villager.
 
 commands:
   vwh:
     description: Shows Villager Workstation Highlight.
-    usage: /<command>
+    usage: /vwh
+    aliases: [VillagerWorkstationHighlights]
+permissions:
+  vwhighlights.command:
+    description: Allows player to use /vwh command.
+    default: true
+  vwhighlights.click:
+    description: Allows player to shift-right click villager to highlight it's workstation.
+    default: op
