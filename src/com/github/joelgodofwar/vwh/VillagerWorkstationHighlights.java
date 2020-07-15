@@ -80,10 +80,10 @@ public class VillagerWorkstationHighlights extends JavaPlugin implements Listene
 		}
 		/** end config check */
 		/** Update Checker */
-		/**if(UpdateCheck){
+		if(UpdateCheck){
 			try {
 				Bukkit.getConsoleSender().sendMessage("Checking for updates...");
-				UpdateChecker updater = new UpdateChecker(this, 68139);
+				UpdateChecker updater = new UpdateChecker(this, 81498);
 				if(updater.checkForUpdates()) {
 					UpdateAvailable = true;
 					Bukkit.getConsoleSender().sendMessage(this.getName() + " NEW VERSION AVAILABLE!");
@@ -94,7 +94,7 @@ public class VillagerWorkstationHighlights extends JavaPlugin implements Listene
 			}catch(Exception e) {
 				Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Could not process update check");
 			}
-		}*/
+		}
 		/** end update checker */
 		
 		Bukkit.getPluginManager().registerEvents(this, this);

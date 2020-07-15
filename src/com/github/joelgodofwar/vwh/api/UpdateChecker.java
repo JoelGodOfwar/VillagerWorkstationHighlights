@@ -20,7 +20,7 @@ public class UpdateChecker {
         project = projectID;
         newVersion = plugin.getDescription().getVersion();
         try {
-            checkURL = new URL("https://github.com/JoelGodOfwar/SinglePlayerSleep/raw/master/versioncheck/" + newVersion.substring(0, 4) + "/version.txt");
+            checkURL = new URL("https://raw.githubusercontent.com/JoelGodOfwar/VillagerWorkstationHighlights/master/versioncheck/" + newVersion.substring(0, 4) + "/version.txt");
         }catch(MalformedURLException e) {
             Bukkit.getLogger().warning("Could not connect to update server.");
             //Bukkit.getPluginManager().disablePlugin(plugin);
