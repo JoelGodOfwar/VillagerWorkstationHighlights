@@ -1,0 +1,18 @@
+1.14_1.0.3
+New format "required_material: CRAFTING_TABLE" instead of "required_material: minecreaft:crafting_table"
+Also includes new sub command /vwh reload, and /vwh toggledebug
+Minor tweaks to serialize code.
+Added tab complete.
+
+1.14_1.0.4
+Added lang files for English(en_US) and Nederlands(nl_NL)
+tab complete now works with vwh or VWH
+D3- Fixed langfile update check, fixed lang file not reloading on /vwh reload command.
+D4- Added color code support for workstation and unemployed messages. Must use & character &e
+D5-Shaded bStats Metrics using maven.
+D6-Added ability to shift right click a workstation and have the villager whose jobsite is there to be highlighted with glowing.
+Requires a compass, and the compass will point to the villager. To reset the compass to world spawn shift right click it on a non assigned job site.
+D7-Added a particle to draw a line to the villager or workstation.
+
+1.14_1.0.5
+D1- Fixed a NPE when clicking with off hand.

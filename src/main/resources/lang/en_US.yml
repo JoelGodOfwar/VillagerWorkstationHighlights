@@ -1,0 +1,11 @@
+version: 1.0.1
+vwh:
+  new_vers: NEW VERSION AVAILABLE!
+  unemployed: That villager is unemployed.
+  workstation: Workstation is  <daJob> at <X> , <Y>, <Z>
+  no_perm: You do not have permission (<perm>)
+  no_console: Console can not use this command.
+  reloaded: Has been reloaded!
+  debug_set: DEBUG has been set to <debug_var>
+  enabled: ENABLED
+  disabled: DISABLED
