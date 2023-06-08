@@ -1,8 +1,8 @@
 <versions>
   <release>
-    <version>1.14.1_1.0.6</version>
-    <notes>D1- Added an exception catch to PlayerInteractEvent, to prevent errors when player is not interacting with a villager or workstation.
-D2- Added an action check, if not right click block return. </notes>
+    <version>1.14.1_1.0.7</version>
+    <notes>D1 Switched to i18n lang files, reworked update checker.
+</notes>
     <link>https://www.spigotmc.org/resources/villager-workstation-highlights.81498/history</link>
   </release>
   <developer>
