@@ -1,0 +1,37 @@
+# DO NOT CHANGE VERSION
+version: 1.0.4
+# Change to false to stop auto-update-check.
+auto_update_check: true
+# 
+# Set to true before sending a log about an issue.
+# Logs trace data required to pinpoint where errors are.
+debug: false
+# 
+# Language
+lang: en_US
+# 
+# Particle Configs
+particle:
+  display: true
+# Involving a workstation
+# name must be a string of a real particle name in uppercase
+# duration must be an integer.
+  workstation: 
+    name: HEART
+    duration: 200
+# Involving a Villager
+# name must be a string of a real particle name in uppercase
+# count must be an integer.
+  villager_line:
+    name: VILLAGER_HAPPY
+    count: 10
+# 
+# Shift Right Click
+shift_click:
+# Set to false to not require item at all.
+  require_item: true
+# Set to false to use custom Material.
+# Works with any workstation.
+  require_workstation: true
+# If require_workstation is true this will be ignored.
+  required_material: crafting_table
