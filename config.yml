@@ -1,6 +1,0 @@
-# Change to false to stop auto-update-check.
-auto_update_check: true
-
-# Set to true before sending a log about an issue.
-# Logs trace data required to pinpoint where errors are.
-debug: false
