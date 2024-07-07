@@ -1,5 +1,9 @@
-1.0.8
+1.0.9
 D1	
+1.0.8
+D1	Folia support.
+D2	Removed Birthday Message code.
+D3	Fixed 1.20.6 Paper code.
 1.0.7
 D1	Switched to i18n lang files, reworked update checker.
 1.0.6

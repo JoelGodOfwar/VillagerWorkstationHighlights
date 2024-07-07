@@ -4,13 +4,15 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
 //import java.util.Scanner;
 //import java.io.IOException;
 //import java.io.InputStream;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.DocumentBuilder;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
